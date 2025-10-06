@@ -22,7 +22,7 @@
   </li>
 </ul>
   
-<h1> Preprints </h1>
+<h2> Preprints </h2>
   
 
 <ul>    
@@ -30,7 +30,42 @@
       Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
       Year: 2025
  </li>
+</ul>
 
-</ul>    
+<h1>
+Teaching 
+</h1>
+
+<h3>
+   2024-2025
+</h3>
+
+<ul>
+   <li>
+      M1-M2 SID UT3: Inter-promotional project supervision: Open data university, energy performance diagnosis group
+   </li>
+   <li>
+      M2-SID UT3: Learning process for Big Data, presentation jury
+   </li>
+   <li>
+      M1 SID UT3: TER supervisons, two students working on LLM evaluation & Machine Learning application in Education.  
+   </li>
+</ul>
+
+<h3>
+2025-2026
+</h3>
+
+<ul>
+<li>
+   1st year INSA: Maths 0 TD (Logic, Set theory, Applications, Sequence)
+</li>
+<li>
+   M1 SID UT: Math methods for supervised Machine Learning TD/TP
+</li>
+<li>
+   M2 Mapi3 & IMA UT: Math for Machine Learning TD/TP
+</li>
+</ul>
   
 </body>
