@@ -4,9 +4,9 @@
 
 <body>
   
-# Publications
+<h1> Publications </h1>
 
-## Published work
+<h2>   Published work </h2>
 
 <ul>
   <li>  
@@ -22,7 +22,7 @@
   </li>
 </ul>
   
-## Preprints
+<h1> Preprints </h1>
   
 
 <ul>    
