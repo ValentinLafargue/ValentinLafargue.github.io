@@ -3,11 +3,10 @@
 </head>
 
 <body>
-
   
-  # Publications
+# Publications
 
-  ## Published work
+## Published work
 
 <ul>
   <li>  
@@ -23,15 +22,15 @@
   </li>
 </ul>
   
-  ## Preprints
+## Preprints
   
 
-  <ul>    
-    <li> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks <br>
-         Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
-         Year: 2025
-    </li>
-  
-  </ul>    
+<ul>    
+ <li> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks <br>
+      Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
+      Year: 2025
+ </li>
+
+</ul>    
   
 </body>
