@@ -10,13 +10,13 @@
 
 <ul>
   <li>  
-        Fairness is in the details: Face Dataset Auditing <br>
+        <a href="https://ecmlpkdd-storage.s3.eu-central-1.amazonaws.com/preprints/2025/ads/preprint_ecml_pkdd_2025_ads_404.pdf"> Fairness is in the details: Face Dataset Auditing </a>  <br>
         Authors: Valentin Lafargue, Emmanuelle Claeys, Jean-Michel Loubes <br>
         Conference Paper: ECML PKDD Applied Data Science Track 2025
   </li>
 
   <li>
-        Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks <br>
+        <a href="https://openreview.net/pdf?id=ZzZAtVcEIK"> Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks </a> <br>
         Authors: Thibaut Boissin, Franck Mamalet, Valentin Lafargue, Mathieu Serrurier <br>
         Workshop Paper: Championing Open-source DEvelopment in ML Workshop@ ICML25 <br>
   </li>
@@ -26,7 +26,7 @@
   
 
 <ul>    
- <li> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks <br>
+ <li> <a href= https://arxiv.org/pdf/2507.20708> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks </a> <br>
       Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
       Year: 2025
  </li>
