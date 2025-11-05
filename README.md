@@ -1,5 +1,5 @@
 <head>
-   Occupation : PhD Student at <a href = 'https://www.math.univ-toulouse.fr/'> IMT </a>, <a href = 'https://www.inria.fr/'> INRIA </a> and <a href = 'https://aniti.univ-toulouse.fr/'> ANITI </a>
+   Occupation : PhD Student at <a href = 'https://www.math.univ-toulouse.fr/'> IMT </a>, <a href = 'https://www.inria.fr/'> INRIA </a>, <a href = 'https://aniti.univ-toulouse.fr/'> ANITI 2 </a> and <a href = 'https://www.irit.fr/en/home/'> IRIT </a>
 </head>
 
 <body>
