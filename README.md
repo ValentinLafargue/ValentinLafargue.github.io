@@ -18,7 +18,7 @@
   <li>
         <a href="https://openreview.net/pdf?id=ZzZAtVcEIK"> Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks </a> <br>
         Authors: Thibaut Boissin, Franck Mamalet, Valentin Lafargue, Mathieu Serrurier <br>
-        Workshop Paper: Championing Open-source DEvelopment in ML Workshop@ ICML25 <br>
+        Workshop Paper: Championing Open-source DEvelopment in ML Workshop@ ICML25 
   </li>
 </ul>
   
@@ -29,6 +29,11 @@
  <li> <a href="https://arxiv.org/pdf/2507.20708"> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks </a> <br>
       Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
       Year: 2025
+ </li>
+ <li>
+    <a href="https://arxiv.org/abs/2603.16749"> Probing Cultural Signals in Large Language Models through Author Profiling </a> <br>
+    Authors: Valentin Lafargue, Ariel Guerra-Adames, Emmanuelle Claeys, Elouan Vuichard, Jean-Michel Loubes <br>
+    Year: 2026
  </li>
 </ul>
 
