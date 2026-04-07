@@ -1,10 +1,10 @@
 <head>
-   Occupation : PhD Student at <a href = 'https://www.math.univ-toulouse.fr/'> IMT </a>, <a href = 'https://www.inria.fr/'> INRIA </a>, <a href = 'https://aniti.univ-toulouse.fr/'> ANITI 2 </a> and <a href = 'https://www.irit.fr/en/home/'> IRIT </a>
+   Occupation : <a href = 'https://doctorat.univ-toulouse.fr/as/ed/cv.pl?mat=192448&site=EDT'> PhD Student </a>  at <a href = 'https://www.math.univ-toulouse.fr/'> IMT </a>, <a href = 'https://www.inria.fr/'> INRIA </a>, <a href = 'https://aniti.univ-toulouse.fr/'> ANITI 2 </a> and <a href = 'https://www.irit.fr/en/home/'> IRIT </a>
 </head>
 
 <body>
   
-<h1> Publications </h1>
+<h1> <a href="https://scholar.google.com/citations?user=YdeyocYAAAAJ" > Publications </a> </h1>
 
 <h2>   Published work </h2>
 
