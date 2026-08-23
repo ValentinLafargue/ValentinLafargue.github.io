@@ -9,33 +9,32 @@
 <h2>   Published work </h2>
 
 <ul>
-  <li>  
+   <li>
+       <a href="https://arxiv.org/abs/2603.16749"> Probing Cultural Signals in Large Language Models through Author Profiling </a> <br>
+       Authors: Valentin Lafargue, Ariel Guerra-Adames, Emmanuelle Claeys, Elouan Vuichard, Jean-Michel Loubes <br>
+       Conference Paper: Empirical Methods in Natural Language Processing 2026
+   </li>
+
+   <li> 
+      <a href="https://arxiv.org/pdf/2507.20708"> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks </a> <br>
+      Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
+      Conference Paper: ECML PKDD Applied Data Science Track 2026
+   </li>
+   
+   <li>  
         <a href="https://ecmlpkdd-storage.s3.eu-central-1.amazonaws.com/preprints/2025/ads/preprint_ecml_pkdd_2025_ads_404.pdf"> Fairness is in the details: Face Dataset Auditing </a>  <br>
         Authors: Valentin Lafargue, Emmanuelle Claeys, Jean-Michel Loubes <br>
         Conference Paper: ECML PKDD Applied Data Science Track 2025
-  </li>
+   </li>
 
-  <li>
+   <li>
         <a href="https://openreview.net/pdf?id=ZzZAtVcEIK"> Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks </a> <br>
         Authors: Thibaut Boissin, Franck Mamalet, Valentin Lafargue, Mathieu Serrurier <br>
         Workshop Paper: Championing Open-source DEvelopment in ML Workshop@ ICML25 
-  </li>
+   </li>
 </ul>
   
-<h2> Preprints </h2>
-  
-
-<ul>    
- <li> <a href="https://arxiv.org/pdf/2507.20708"> Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks </a> <br>
-      Authors: Valentin Lafargue, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, Jean-Michel Loubes <br>
-      Year: 2025
- </li>
- <li>
-    <a href="https://arxiv.org/abs/2603.16749"> Probing Cultural Signals in Large Language Models through Author Profiling </a> <br>
-    Authors: Valentin Lafargue, Ariel Guerra-Adames, Emmanuelle Claeys, Elouan Vuichard, Jean-Michel Loubes <br>
-    Year: 2026
- </li>
-</ul>
+<!-- <h2> Preprints </h2> --!>
 
 <h1>
 Teaching 
@@ -50,10 +49,10 @@ Teaching
       M1-M2 SID UT3: Inter-promotional project supervision: Open data university, energy performance diagnosis group
    </li>
    <li>
-      M2-SID UT3: Learning process for Big Data, presentation jury
+      M1 SID UT3: TER supervisons, two students working on LLM evaluation and ML applications in education.  
    </li>
    <li>
-      M1 SID UT3: TER supervisons, two students working on LLM evaluation & Machine Learning application in Education.  
+      M2-SID UT3: Learning process for Big Data, presentation jury
    </li>
 </ul>
 
@@ -63,13 +62,29 @@ Teaching
 
 <ul>
 <li>
-   1st year INSA: Maths 0 TD (Logic, Set theory, Applications, Sequence)
+   1st year INSA: Maths 0 TDs (Logic, Set theory, Applications, Sequence)
 </li>
 <li>
-   M1 SID UT: Math methods for supervised Machine Learning TD/TP
+   M1 SID UT: Math methods for supervised Machine Learning TDs/TPs
 </li>
 <li>
-   M2 Mapi3 & IMA UT: Math for Machine Learning TD/TP
+   M2 Mapi3 & IMA UT: Math for Machine Learning TDs/TPs
+</li>
+</ul>
+
+<h3>
+2026-2027
+</h3>
+
+<ul>
+<li>
+   M1 SID UT: Math methods for supervised Machine Learning TDs/TPs
+</li>
+<li>
+   M2 SID UT: Deep Learning Lectures/TDs/TPs
+</li>
+<li>
+   M2 Mapi3 & IMA UT: Math for Machine Learning TDs/TPs
 </li>
 </ul>
   
