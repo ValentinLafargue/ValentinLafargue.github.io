@@ -33,8 +33,6 @@
         Workshop Paper: Championing Open-source DEvelopment in ML Workshop@ ICML25 
    </li>
 </ul>
-  
-<!-- <h2> Preprints </h2> --!>
 
 <h1>
 Teaching 
