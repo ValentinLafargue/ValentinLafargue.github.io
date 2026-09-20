@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valentin Lafargue – AI evaluation and auditing</title>
+<meta name="description" content="PhD student at IMT, INRIA, ANITI 2 and IRIT working on AI evaluation and auditing: fairness, robustness and bias in machine learning and generative AI.">
+<meta name="theme-color" content="#F9F8FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14101C" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --paper: #F9F8FB;
+    --surface: #FFFFFF;
+    --ink: #1B1726;
+    --muted: #5E5872;
+    --rule: #DEDAE8;
+    --tick: #B9B2CB;
+    --tick-strong: #7C7593;
+    --accent: #5A2D91;          /* Toulouse violet */
+    --accent-soft: #EFE9F8;
+    --accent-ink: #FFFFFF;
+
+    --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14101C;
+      --surface: #1C1728;
+      --ink: #ECE8F4;
+      --muted: #ABA4BF;
+      --rule: #2E2740;
+      --tick: #4A4163;
+      --tick-strong: #7E7499;
+      --accent: #C4A8F5;
+      --accent-soft: #2A2140;
+      --accent-ink: #14101C;
+    }
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transition: text-decoration-color 0.15s;
+  }
+  a:hover { text-decoration-color: var(--accent); }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  h1, h2, h3, p { margin-block: 0; }
+
+  .wrap {
+    max-width: 66rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 20;
+    padding: 0.5rem 0.9rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .skip:focus { top: 0.75rem; }
+
+  section[id] { scroll-margin-top: 3.5rem; }
+
+  /* ---------- Top bar ---------- */
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 3.5rem;
+  }
+
+  .brand {
+    font: 500 1.15rem/1 var(--serif);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .bar nav ul {
+    display: flex;
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bar nav a {
+    display: block;
+    padding: 0.55rem 0;
+    border-bottom: 2px solid transparent;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .bar nav a:hover { color: var(--ink); }
+  .bar nav a[aria-current="true"] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(3.5rem, 10vw, 7rem) clamp(1rem, 3vw, 2rem); }
+
+  .hero h1 {
+    margin-bottom: 1.5rem;
+    font: 500 clamp(2.9rem, 8vw, 5.5rem)/1 var(--serif);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .hero .lead {
+    margin-bottom: 1.25rem;
+    max-width: 26em;
+    font: 400 clamp(1.4rem, 2.8vw, 1.9rem)/1.35 var(--serif);
+    text-wrap: pretty;
+  }
+
+  .hero .about {
+    max-width: 56ch;
+    color: var(--muted);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.15rem;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 0.98rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
+  .btn.ghost { background: transparent; color: var(--accent); }
+  .btn.ghost:hover { background: var(--accent-soft); }
+
+  /* ---------- Sections ---------- */
+  .section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr);
+    gap: 1.5rem 3.5rem;
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--rule);
+  }
+  #publications .section-grid { border-top: 0; }
+
+  .section-head {
+    align-self: start;
+    position: sticky;
+    top: 5.5rem;
+  }
+
+  .section-head h2 {
+    font: 500 1.75rem/1.15 var(--serif);
+    letter-spacing: -0.01em;
+  }
+
+  .section-head .side-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Timeline (education, teaching) ---------- */
+  .timeline {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 1.75rem;
+    list-style: none;
+    border-left: 1px solid var(--rule);
+  }
+
+  .timeline > li {
+    position: relative;
+    padding-bottom: 2.75rem;
+  }
+  .timeline > li:last-child { padding-bottom: 0; }
+
+  .timeline > li::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem - 5px);
+    top: 0.5rem;
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--tick-strong);
+    border-radius: 50%;
+    background: var(--paper);
+  }
+
+  .timeline > li.current::before {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .when {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .entry-title {
+    font: 500 1.4rem/1.25 var(--serif);
+    letter-spacing: -0.005em;
+  }
+
+  .subject {
+    margin-top: 0.2rem;
+    font: 400 1.12rem/1.4 var(--serif);
+  }
+
+  .where {
+    margin-top: 0.15rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .grades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.75rem;
+    margin: 0.95rem 0 0;
+    padding: 0;
+  }
+  .grades div { display: flex; flex-direction: column; }
+  .grades dt { font-size: 0.85rem; color: var(--muted); }
+  .grades dd {
+    margin: 0;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .grades .rank {
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.5rem;
+    border-radius: 99px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.85rem;
+  }
+
+  .coursework {
+    margin-top: 0.85rem;
+    max-width: 40rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-wrap: balance;
+  }
+
+  .notes {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 40rem;
+    margin: 0.95rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .notes li { position: relative; padding-left: 1.1rem; }
+  .notes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* ---------- Publications ---------- */
+  .pubs { margin: 0; padding: 0; list-style: none; }
+
+  .pub {
+    padding-block: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .pub:first-child { padding-top: 0; border-top: 0; }
+  .pub:last-child { padding-bottom: 0; }
+
+  .pub-title {
+    margin-bottom: 0.4rem;
+    font: 500 1.3rem/1.3 var(--serif);
+    text-wrap: balance;
+  }
+  .pub-title a {
+    color: var(--ink);
+    text-decoration-color: var(--tick);
+  }
+  .pub-title a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+  .authors { font-size: 0.98rem; color: var(--muted); }
+  .authors strong { color: var(--ink); font-weight: 600; }
+  .nm, .authors strong, .term { white-space: nowrap; }
+
+  .venue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.7rem;
+    margin-top: 0.6rem;
+  }
+
+  .kind {
+    padding: 0.05rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    background: var(--surface);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .venue-name { font: italic 400 1.02rem/1.4 var(--serif); }
+
+  .pub-links {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pub-links a {
+    display: inline-block;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .pub-links a:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+  /* ---------- Teaching ---------- */
+  .courses {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .courses li {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    gap: 0.2rem 1.25rem;
+  }
+  .prog { font-size: 0.95rem; font-weight: 600; white-space: nowrap; }
+
+  /* ---------- Footer ---------- */
+  .foot-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1.75rem 3rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  /* ---------- Load sequence: the intro rises into place ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero > * { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .hero > :nth-child(2) { animation-delay: 0.08s; }
+    .hero > :nth-child(3) { animation-delay: 0.16s; }
+    .hero > :nth-child(4) { animation-delay: 0.24s; }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+  /* ---------- Small screens ---------- */
+  @media (max-width: 760px) {
+    .brand { display: none; }
+    .bar-inner { justify-content: center; }
+    .bar nav ul { gap: 1.5rem; }
+
+    .section-grid { grid-template-columns: minmax(0, 1fr); }
+    .section-head { position: static; }
+    .section-head .side-link { margin-top: 0.25rem; }
+
+    .courses li { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media (max-width: 400px) {
+    .term { white-space: normal; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    .bar, .actions, .skip { display: none; }
+    .section-head { position: static; }
+    body { background: #fff; color: #000; }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="brand" href="#top">Valentin Lafargue</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Intro -->
+  <section class="hero wrap" id="top" aria-labelledby="name">
+    <h1 id="name">Valentin Lafargue</h1>
+
+    <p class="lead">
+      <a href="https://doctorat.univ-toulouse.fr/as/ed/cv.pl?mat=192448&amp;site=EDT">PhD student</a> at
+      <a href="https://www.math.univ-toulouse.fr/">IMT</a>,
+      <a href="https://www.inria.fr/">INRIA</a>,
+      <a href="https://aniti.univ-toulouse.fr/">ANITI 2</a> and
+      <a href="https://www.irit.fr/en/home/">IRIT</a>
+      focused on AI evaluation and auditing.
+    </p>
+
+    <p class="about">
+      I'm passionate about interdisciplinary work, exploring how AI intersects with fields like Law, Sociology, Cultural Analytics, Psychology, and Education.
+    </p>
+
+    <div class="actions">
+      <a class="btn" href="#publications">See publications</a>
+      <a class="btn ghost" href="#teaching">See teaching</a>
+      <a class="btn ghost" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ">Google Scholar</a>
+      <a class="btn ghost" href="mailto:valentin.lafargue@math.univ-toulouse.fr">Contact</a>
+    </div>
+
+  </section>
+
+  <!-- Publications -->
+  <section class="wrap" id="publications" aria-labelledby="publications-h">
+    <div class="section-grid">
+      <div class="section-head">
+        <h2 id="publications-h">Publications</h2>
+        <a class="side-link" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ">Google Scholar profile</a>
+      </div>
+
+      <ul class="pubs">
+        <li class="pub">
+          <h3 class="pub-title"><a href="https://arxiv.org/abs/2603.16749">Probing Cultural Signals in Large Language Models through Author Profiling</a></h3>
+          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Ariel Guerra-Adames,</span> <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Elouan Vuichard,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="venue">
+            <span class="kind">Conference paper</span>
+            <span class="venue-name">Empirical Methods in Natural Language Processing (EMNLP) 2026</span>
+          </p>
+        </li>
+
+        <li class="pub">
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2507.20708">Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks</a></h3>
+          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Adriana Laurindo Monteiro,</span> <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Laurent Risser,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="venue">
+            <span class="kind">Conference paper</span>
+            <span class="venue-name">ECML PKDD Applied Data Science Track 2026</span>
+          </p>
+          <ul class="pub-links">
+            <li><a href="files/ecml_pkdd_2026_slides.pdf">Slides</a></li>
+            <li><a href="files/ecml_pkdd_2026_poster.pdf">Poster</a></li>
+          </ul>
+        </li>
+
+        <li class="pub">
+          <h3 class="pub-title"><a href="https://ecmlpkdd-storage.s3.eu-central-1.amazonaws.com/preprints/2025/ads/preprint_ecml_pkdd_2025_ads_404.pdf">Fairness is in the details: Face Dataset Auditing</a></h3>
+          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="venue">
+            <span class="kind">Conference paper</span>
+            <span class="venue-name">ECML PKDD Applied Data Science Track 2025</span>
+          </p>
+          <ul class="pub-links">
+            <li><a href="files/ecml_pkdd_2025_slides.pdf">Slides</a></li>
+            <li><a href="files/ecml_pkdd_2025_poster.pdf">Poster</a></li>
+          </ul>
+        </li>
+
+        <li class="pub">
+          <h3 class="pub-title"><a href="https://openreview.net/pdf?id=ZzZAtVcEIK">Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks</a></h3>
+          <p class="authors"><span class="nm">Thibaut Boissin,</span> <span class="nm">Franck Mamalet,</span> <strong>Valentin Lafargue</strong>, <span class="nm">Mathieu Serrurier</span></p>
+          <p class="venue">
+            <span class="kind">Workshop paper</span>
+            <span class="venue-name">Championing Open-source DEvelopment in ML Workshop @ ICML25</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="wrap" id="education" aria-labelledby="education-h">
+    <div class="section-grid">
+      <div class="section-head">
+        <h2 id="education-h">Education</h2>
+      </div>
+
+      <ol class="timeline">
+        <li class="current">
+          <p class="when">2024 – present</p>
+          <h3 class="entry-title">PhD in Mathematics</h3>
+          <p class="subject">Disloyalty and Biases in Generative AI</p>
+          <p class="where">IMT, INRIA, ANITI 2, IRIT</p>
+          <ul class="notes">
+            <li>Supervised by J.-M. Loubes and E. Claeys</li>
+            <li>Research on fairness, robustness and bias auditing in machine learning and generative AI (see <a href="#publications">Publications</a>)</li>
+            <li>Teaching duties: project/TER supervision, tutorials (TDs) and practicals (TPs)&nbsp;– see&nbsp;<a href="#teaching">Teaching</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <p class="when">2023 – 2024</p>
+          <h3 class="entry-title">Master 2 (MSc)</h3>
+          <p class="subject">Data Science and Data Engineering</p>
+          <p class="where">Université Paul Sabatier, Toulouse</p>
+          <dl class="grades">
+            <div><dt>Result</dt><dd>16.91/20 <span class="rank">rank 1/37</span></dd></div>
+          </dl>
+          <p class="coursework"><span class="term">Deep Learning,</span> <span class="term">NLP &amp; SVACS,</span> <span class="term">advanced statistics,</span> <span class="term">parallel databases and cloud computing,</span> <span class="term">business management,</span> <span class="term">NoSQL,</span> <span class="term">ethical communication,</span> <span class="term">law for data.</span></p>
+        </li>
+
+        <li>
+          <p class="when">2022 – 2023</p>
+          <h3 class="entry-title">Master 1</h3>
+          <p class="subject">Data Science and Data Engineering</p>
+          <p class="where">Université Paul Sabatier, Toulouse</p>
+          <dl class="grades">
+            <div><dt>Result</dt><dd>16.26/20 <span class="rank">rank 1/40</span></dd></div>
+          </dl>
+          <p class="coursework"><span class="term">Statistics,</span> <span class="term">optimization,</span> <span class="term">time series,</span> <span class="term">machine learning,</span> <span class="term">data warehousing,</span> <span class="term">data mining,</span> <span class="term">advanced algorithmics,</span> <span class="term">advanced Python.</span></p>
+        </li>
+
+        <li>
+          <p class="when">2019 – 2022</p>
+          <h3 class="entry-title">Bachelor</h3>
+          <p class="subject">Mathematics, Higher Education and Research</p>
+          <p class="where">Université Paul Sabatier, Toulouse</p>
+          <dl class="grades">
+            <div><dt>Year 1</dt><dd>16.52/20 <span class="rank">rank 4/164</span></dd></div>
+            <div><dt>Year 2</dt><dd>16.27/20 <span class="rank">rank 5/157</span></dd></div>
+            <div><dt>Year 3</dt><dd>14.64/20 <span class="rank">rank 3/31</span></dd></div>
+          </dl>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Teaching -->
+  <section class="wrap" id="teaching" aria-labelledby="teaching-h">
+    <div class="section-grid">
+      <div class="section-head">
+        <h2 id="teaching-h">Teaching</h2>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <h3 class="entry-title">2026–2027</h3>
+          <ul class="courses">
+            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning TDs/TPs</span></li>
+            <li><span class="prog">M2 SID UT</span><span>Deep Learning Lectures/TDs/TPs</span></li>
+            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning TDs/TPs</span></li>
+          </ul>
+        </li>
+
+        <li>
+          <h3 class="entry-title">2025–2026</h3>
+          <ul class="courses">
+            <li><span class="prog">1st year INSA</span><span>Maths 0 TDs (Logic, Set theory, Applications, Sequence)</span></li>
+            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning TDs/TPs</span></li>
+            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning TDs/TPs</span></li>
+          </ul>
+        </li>
+
+        <li>
+          <h3 class="entry-title">2024–2025</h3>
+          <ul class="courses">
+            <li><span class="prog">M1–M2 SID UT3</span><span>Inter-promotional project supervision: Open data university, energy performance diagnosis group</span></li>
+            <li><span class="prog">M1 SID UT3</span><span>TER supervisions, two students working on LLM evaluation and ML applications in education</span></li>
+            <li><span class="prog">M2 SID UT3</span><span>Learning process for Big Data, presentation jury</span></li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-inner">
+    <p>© Valentin Lafargue</p>
+    <p><a href="mailto:valentin.lafargue@math.univ-toulouse.fr">valentin.lafargue@math.univ-toulouse.fr</a></p>
+    <p><a href="#top">Back to top</a></p>
+  </div>
+</footer>
+
+<script>
+  // Highlight the current section in the top navigation.
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var active = byId[entry.target.id];
+        if (active) active.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    Object.keys(byId).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  })();
+</script>
+</body>
+</html>
