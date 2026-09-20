@@ -62,7 +62,6 @@
     font: 400 1.0625rem/1.65 var(--sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    text-wrap: pretty;
   }
 
   a {
@@ -103,6 +102,9 @@
   .skip:focus { top: 0.75rem; }
 
   section[id] { scroll-margin-top: 3.5rem; }
+
+  /* Hyphenated or slashed words stay whole: lines break only at spaces */
+  .nb { white-space: nowrap; }
 
   /* ---------- Top bar ---------- */
   .bar {
@@ -160,18 +162,14 @@
     margin-bottom: 1.5rem;
     font: 500 clamp(2.9rem, 8vw, 5.5rem)/1 var(--serif);
     letter-spacing: -0.025em;
-    text-wrap: balance;
   }
 
   .hero .lead {
     margin-bottom: 1.25rem;
-    max-width: 26em;
     font: 400 clamp(1.4rem, 2.8vw, 1.9rem)/1.35 var(--serif);
-    text-wrap: pretty;
   }
 
   .hero .about {
-    max-width: 56ch;
     color: var(--muted);
   }
 
@@ -307,16 +305,13 @@
 
   .coursework {
     margin-top: 0.85rem;
-    max-width: 40rem;
     font-size: 0.95rem;
     color: var(--muted);
-    text-wrap: balance;
   }
 
   .notes {
     display: grid;
     gap: 0.4rem;
-    max-width: 40rem;
     margin: 0.95rem 0 0;
     padding: 0;
     list-style: none;
@@ -345,7 +340,6 @@
   .pub-title {
     margin-bottom: 0.4rem;
     font: 500 1.3rem/1.3 var(--serif);
-    text-wrap: balance;
   }
   .pub-title a {
     color: var(--ink);
@@ -355,7 +349,6 @@
 
   .authors { font-size: 0.98rem; color: var(--muted); }
   .authors strong { color: var(--ink); font-weight: 600; }
-  .nm, .authors strong, .term { white-space: nowrap; }
 
   .venue {
     display: flex;
@@ -408,7 +401,7 @@
     grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
     gap: 0.2rem 1.25rem;
   }
-  .prog { font-size: 0.95rem; font-weight: 600; white-space: nowrap; }
+  .prog { font-size: 0.95rem; font-weight: 600; }
 
   /* ---------- Footer ---------- */
   .foot-inner {
@@ -442,10 +435,6 @@
     .section-head .side-link { margin-top: 0.25rem; }
 
     .courses li { grid-template-columns: minmax(0, 1fr); }
-  }
-
-  @media (max-width: 400px) {
-    .term { white-space: normal; }
   }
 
   /* ---------- Print ---------- */
@@ -512,7 +501,7 @@
       <ul class="pubs">
         <li class="pub">
           <h3 class="pub-title"><a href="https://arxiv.org/abs/2603.16749">Probing Cultural Signals in Large Language Models through Author Profiling</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Ariel Guerra-Adames,</span> <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Elouan Vuichard,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="authors"><strong>Valentin Lafargue</strong>, Ariel <span class="nb">Guerra-Adames</span>, Emmanuelle Claeys, Elouan Vuichard, <span class="nb">Jean-Michel</span> Loubes</p>
           <p class="venue">
             <span class="kind">Conference paper</span>
             <span class="venue-name">Empirical Methods in Natural Language Processing (EMNLP) 2026</span>
@@ -521,7 +510,7 @@
 
         <li class="pub">
           <h3 class="pub-title"><a href="https://arxiv.org/pdf/2507.20708">Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Adriana Laurindo Monteiro,</span> <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Laurent Risser,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="authors"><strong>Valentin Lafargue</strong>, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, <span class="nb">Jean-Michel</span> Loubes</p>
           <p class="venue">
             <span class="kind">Conference paper</span>
             <span class="venue-name">ECML PKDD Applied Data Science Track 2026</span>
@@ -534,7 +523,7 @@
 
         <li class="pub">
           <h3 class="pub-title"><a href="https://ecmlpkdd-storage.s3.eu-central-1.amazonaws.com/preprints/2025/ads/preprint_ecml_pkdd_2025_ads_404.pdf">Fairness is in the details: Face Dataset Auditing</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, <span class="nm">Emmanuelle Claeys,</span> <span class="nm">Jean-Michel Loubes</span></p>
+          <p class="authors"><strong>Valentin Lafargue</strong>, Emmanuelle Claeys, <span class="nb">Jean-Michel</span> Loubes</p>
           <p class="venue">
             <span class="kind">Conference paper</span>
             <span class="venue-name">ECML PKDD Applied Data Science Track 2025</span>
@@ -547,10 +536,10 @@
 
         <li class="pub">
           <h3 class="pub-title"><a href="https://openreview.net/pdf?id=ZzZAtVcEIK">Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks</a></h3>
-          <p class="authors"><span class="nm">Thibaut Boissin,</span> <span class="nm">Franck Mamalet,</span> <strong>Valentin Lafargue</strong>, <span class="nm">Mathieu Serrurier</span></p>
+          <p class="authors">Thibaut Boissin, Franck Mamalet, <strong>Valentin Lafargue</strong>, Mathieu Serrurier</p>
           <p class="venue">
             <span class="kind">Workshop paper</span>
-            <span class="venue-name">Championing Open-source DEvelopment in ML Workshop @ ICML25</span>
+            <span class="venue-name">Championing <span class="nb">Open-source</span> DEvelopment in ML Workshop @ ICML25</span>
           </p>
         </li>
       </ul>
@@ -571,9 +560,9 @@
           <p class="subject">Disloyalty and Biases in Generative AI</p>
           <p class="where">IMT, INRIA, ANITI 2, IRIT</p>
           <ul class="notes">
-            <li>Supervised by J.-M. Loubes and E. Claeys</li>
+            <li>Supervised by <span class="nb">J.-M.</span> Loubes and E. Claeys</li>
             <li>Research on fairness, robustness and bias auditing in machine learning and generative AI (see <a href="#publications">Publications</a>)</li>
-            <li>Teaching duties: project/TER supervision, tutorials (TDs) and practicals (TPs)&nbsp;– see&nbsp;<a href="#teaching">Teaching</a></li>
+            <li>Teaching duties: <span class="nb">project/TER</span> supervision, tutorials (TDs) and practicals (TPs) – see <a href="#teaching">Teaching</a></li>
           </ul>
         </li>
 
@@ -585,7 +574,7 @@
           <dl class="grades">
             <div><dt>Result</dt><dd>16.91/20 <span class="rank">rank 1/37</span></dd></div>
           </dl>
-          <p class="coursework"><span class="term">Deep Learning,</span> <span class="term">NLP &amp; SVACS,</span> <span class="term">advanced statistics,</span> <span class="term">parallel databases and cloud computing,</span> <span class="term">business management,</span> <span class="term">NoSQL,</span> <span class="term">ethical communication,</span> <span class="term">law for data.</span></p>
+          <p class="coursework">Deep Learning, NLP &amp; SVACS, advanced statistics, parallel databases and cloud computing, business management, NoSQL, ethical communication, law for data.</p>
         </li>
 
         <li>
@@ -596,7 +585,7 @@
           <dl class="grades">
             <div><dt>Result</dt><dd>16.26/20 <span class="rank">rank 1/40</span></dd></div>
           </dl>
-          <p class="coursework"><span class="term">Statistics,</span> <span class="term">optimization,</span> <span class="term">time series,</span> <span class="term">machine learning,</span> <span class="term">data warehousing,</span> <span class="term">data mining,</span> <span class="term">advanced algorithmics,</span> <span class="term">advanced Python.</span></p>
+          <p class="coursework">Statistics, optimization, time series, machine learning, data warehousing, data mining, advanced algorithmics, advanced Python.</p>
         </li>
 
         <li>
@@ -623,27 +612,27 @@
 
       <ol class="timeline">
         <li>
-          <h3 class="entry-title">2026–2027</h3>
+          <h3 class="entry-title"><span class="nb">2026–2027</span></h3>
           <ul class="courses">
-            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning TDs/TPs</span></li>
-            <li><span class="prog">M2 SID UT</span><span>Deep Learning Lectures/TDs/TPs</span></li>
-            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning TDs/TPs</span></li>
+            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning <span class="nb">TDs/TPs</span></span></li>
+            <li><span class="prog">M2 SID UT</span><span>Deep Learning <span class="nb">Lectures/TDs/TPs</span></span></li>
+            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning <span class="nb">TDs/TPs</span></span></li>
           </ul>
         </li>
 
         <li>
-          <h3 class="entry-title">2025–2026</h3>
+          <h3 class="entry-title"><span class="nb">2025–2026</span></h3>
           <ul class="courses">
             <li><span class="prog">1st year INSA</span><span>Maths 0 TDs (Logic, Set theory, Applications, Sequence)</span></li>
-            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning TDs/TPs</span></li>
-            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning TDs/TPs</span></li>
+            <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning <span class="nb">TDs/TPs</span></span></li>
+            <li><span class="prog">M2 Mapi3 &amp; IMA UT</span><span>Math for Machine Learning <span class="nb">TDs/TPs</span></span></li>
           </ul>
         </li>
 
         <li>
-          <h3 class="entry-title">2024–2025</h3>
+          <h3 class="entry-title"><span class="nb">2024–2025</span></h3>
           <ul class="courses">
-            <li><span class="prog">M1–M2 SID UT3</span><span>Inter-promotional project supervision: Open data university, energy performance diagnosis group</span></li>
+            <li><span class="prog"><span class="nb">M1–M2</span> SID UT3</span><span><span class="nb">Inter-promotional</span> project supervision: Open data university, energy performance diagnosis group</span></li>
             <li><span class="prog">M1 SID UT3</span><span>TER supervisions, two students working on LLM evaluation and ML applications in education</span></li>
             <li><span class="prog">M2 SID UT3</span><span>Learning process for Big Data, presentation jury</span></li>
           </ul>
@@ -657,7 +646,7 @@
 <footer class="wrap">
   <div class="foot-inner">
     <p>© Valentin Lafargue</p>
-    <p><a href="mailto:valentin.lafargue@math.univ-toulouse.fr">valentin.lafargue@math.univ-toulouse.fr</a></p>
+    <p><a href="mailto:valentin.lafargue@math.univ-toulouse.fr"><span class="nb">valentin.lafargue@math.univ-toulouse.fr</span></a></p>
     <p><a href="#top">Back to top</a></p>
   </div>
 </footer>
