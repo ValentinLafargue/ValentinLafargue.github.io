@@ -4,9 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Valentin Lafargue – AI evaluation and auditing</title>
-<meta name="description" content="PhD student at IMT, INRIA, ANITI 2 and IRIT working on AI evaluation and auditing: fairness, robustness and bias in machine learning and generative AI.">
+<meta name="description" content="PhD student at IMT, INRIA, ANITI 2 and IRIT working on AI evaluation and auditing: fairness, robustness and bias in machine learning and generative AI. Publications, talks, education and teaching.">
 <meta name="theme-color" content="#F9F8FB" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14101C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235A2D91'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='white'%3EVL%3C/text%3E%3C/svg%3E">
+
+<!-- Apply a saved light/dark choice before the page paints -->
+<script>
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,15 +31,17 @@
     --accent: #5A2D91;          /* Toulouse violet */
     --accent-soft: #EFE9F8;
     --accent-ink: #FFFFFF;
+    --glow: rgba(90, 45, 145, 0.10);
+    --shadow: 0 1px 2px rgba(27, 23, 38, 0.04), 0 8px 24px -12px rgba(27, 23, 38, 0.12);
 
     --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-    color-scheme: light dark;
+    color-scheme: light;
   }
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --paper: #14101C;
       --surface: #1C1728;
       --ink: #ECE8F4;
@@ -44,7 +52,25 @@
       --accent: #C4A8F5;
       --accent-soft: #2A2140;
       --accent-ink: #14101C;
+      --glow: rgba(196, 168, 245, 0.08);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+      color-scheme: dark;
     }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14101C;
+    --surface: #1C1728;
+    --ink: #ECE8F4;
+    --muted: #ABA4BF;
+    --rule: #2E2740;
+    --tick: #4A4163;
+    --tick-strong: #7E7499;
+    --accent: #C4A8F5;
+    --accent-soft: #2A2140;
+    --accent-ink: #14101C;
+    --glow: rgba(196, 168, 245, 0.08);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
   }
 
   /* ---------- Base ---------- */
@@ -70,22 +96,22 @@
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
     text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
-    transition: text-decoration-color 0.15s;
+    transition: text-decoration-color 0.15s, color 0.15s, background 0.15s, border-color 0.15s;
   }
   a:hover { text-decoration-color: var(--accent); }
 
-  a:focus-visible {
+  a:focus-visible, button:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 3px;
+    border-radius: 4px;
   }
 
   h1, h2, h3, p { margin-block: 0; }
 
   .wrap {
-    max-width: 66rem;
+    max-width: 68rem;
     margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
   }
 
   .skip {
@@ -101,40 +127,65 @@
   }
   .skip:focus { top: 0.75rem; }
 
-  section[id] { scroll-margin-top: 3.5rem; }
+  section[id] { scroll-margin-top: 4rem; }
 
   /* Hyphenated or slashed words stay whole: lines break only at spaces */
   .nb { white-space: nowrap; }
+
+  .icon {
+    width: 1em;
+    height: 1em;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
   /* ---------- Top bar ---------- */
   .bar {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
-    -webkit-backdrop-filter: saturate(1.4) blur(10px);
-    backdrop-filter: saturate(1.4) blur(10px);
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
     border-bottom: 1px solid var(--rule);
   }
 
   .bar-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1.5rem;
-    min-height: 3.5rem;
+    min-height: 3.75rem;
   }
 
   .brand {
-    font: 500 1.15rem/1 var(--serif);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-right: auto;
+    font: 500 1.12rem/1 var(--serif);
     letter-spacing: -0.01em;
     color: var(--ink);
     text-decoration: none;
   }
+  .monogram {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 7px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: 500 0.9rem/1 var(--serif);
+    letter-spacing: 0.02em;
+  }
 
   .bar nav ul {
     display: flex;
-    gap: 1.75rem;
+    gap: 0.25rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -142,69 +193,188 @@
 
   .bar nav a {
     display: block;
-    padding: 0.55rem 0;
-    border-bottom: 2px solid transparent;
-    font-size: 0.95rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.93rem;
     font-weight: 500;
     color: var(--muted);
     text-decoration: none;
+    white-space: nowrap;
   }
-  .bar nav a:hover { color: var(--ink); }
+  .bar nav a:hover { color: var(--ink); background: var(--accent-soft); }
   .bar nav a[aria-current="true"] {
     color: var(--accent);
-    border-bottom-color: var(--accent);
+    background: var(--accent-soft);
   }
 
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .theme-toggle .moon { display: none; }
+  .is-dark .theme-toggle .sun { display: none; }
+  .is-dark .theme-toggle .moon { display: block; }
+
   /* ---------- Hero ---------- */
-  .hero { padding-block: clamp(3.5rem, 10vw, 7rem) clamp(1rem, 3vw, 2rem); }
+  .hero-band {
+    position: relative;
+    overflow: hidden;
+  }
+  /* Soft violet glow and a faint dot grid behind the intro */
+  .hero-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, var(--glow), transparent 70%),
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--tick) 45%, transparent) 1px, transparent 0) 0 0 / 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+    mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+    gap: 3rem 4rem;
+    align-items: end;
+    padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: currentColor;
+  }
 
   .hero h1 {
-    margin-bottom: 1.5rem;
-    font: 500 clamp(2.9rem, 8vw, 5.5rem)/1 var(--serif);
-    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
+    font: 500 clamp(2.6rem, 6.5vw, 4.6rem)/1 var(--serif);
+    letter-spacing: -0.03em;
   }
 
   .hero .lead {
-    margin-bottom: 1.25rem;
-    font: 400 clamp(1.4rem, 2.8vw, 1.9rem)/1.35 var(--serif);
+    max-width: 38rem;
+    margin-bottom: 1rem;
+    font: 400 clamp(1.3rem, 2.5vw, 1.7rem)/1.35 var(--serif);
   }
 
   .hero .about {
+    max-width: 38rem;
+    color: var(--muted);
+  }
+
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .topics li {
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    background: var(--surface);
+    font-size: 0.86rem;
     color: var(--muted);
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.6rem;
     margin-top: 2rem;
   }
 
   .btn {
-    display: inline-block;
-    padding: 0.65rem 1.15rem;
-    border: 1px solid var(--accent);
-    border-radius: 6px;
-    background: var(--accent);
-    color: var(--accent-ink);
-    font-size: 0.98rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.05rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 0.95rem;
     font-weight: 500;
     text-decoration: none;
-    transition: background 0.15s;
   }
-  .btn:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
-  .btn.ghost { background: transparent; color: var(--accent); }
-  .btn.ghost:hover { background: var(--accent-soft); }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); color: var(--accent-ink); }
+
+  /* Latest panel */
+  .latest {
+    padding: 1.35rem 1.4rem 1.2rem;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .latest h2 {
+    margin-bottom: 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .latest ol { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  .latest li { padding-block: 0.75rem; border-top: 1px solid var(--rule); }
+  .latest li:first-child { padding-top: 0; border-top: 0; }
+  .latest li:last-child { padding-bottom: 0; }
+  .latest .tag {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .latest a {
+    color: var(--ink);
+    font: 400 1.02rem/1.35 var(--serif);
+    text-decoration: none;
+  }
+  .latest a:hover { color: var(--accent); }
 
   /* ---------- Sections ---------- */
   .section-grid {
     display: grid;
-    grid-template-columns: minmax(0, 11.5rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
     gap: 1.5rem 3.5rem;
-    padding-block: clamp(2.5rem, 6vw, 4rem);
+    padding-block: clamp(2.75rem, 6vw, 4.5rem);
     border-top: 1px solid var(--rule);
   }
-  #publications .section-grid { border-top: 0; }
 
   .section-head {
     align-self: start;
@@ -212,53 +382,39 @@
     top: 5.5rem;
   }
 
+  .section-num {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
   .section-head h2 {
-    font: 500 1.75rem/1.15 var(--serif);
-    letter-spacing: -0.01em;
+    font: 500 1.9rem/1.1 var(--serif);
+    letter-spacing: -0.015em;
+  }
+
+  .section-note {
+    margin-top: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--muted);
   }
 
   .section-head .side-link {
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.6rem;
+    font-size: 0.92rem;
   }
 
-  /* ---------- Timeline (education, teaching) ---------- */
-  .timeline {
-    position: relative;
-    margin: 0;
-    padding: 0 0 0 1.75rem;
-    list-style: none;
-    border-left: 1px solid var(--rule);
-  }
-
-  .timeline > li {
-    position: relative;
-    padding-bottom: 2.75rem;
-  }
-  .timeline > li:last-child { padding-bottom: 0; }
-
-  .timeline > li::before {
-    content: "";
-    position: absolute;
-    left: calc(-1.75rem - 5px);
-    top: 0.5rem;
-    width: 9px;
-    height: 9px;
-    border: 1.5px solid var(--tick-strong);
-    border-radius: 50%;
-    background: var(--paper);
-  }
-
-  .timeline > li.current::before {
-    border-color: var(--accent);
-    background: var(--accent);
-    box-shadow: 0 0 0 4px var(--accent-soft);
-  }
-
+  /* ---------- Shared bits ---------- */
   .when {
     margin-bottom: 0.3rem;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
@@ -280,34 +436,53 @@
     color: var(--muted);
   }
 
-  .grades {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.75rem;
-    margin: 0.95rem 0 0;
-    padding: 0;
-  }
-  .grades div { display: flex; flex-direction: column; }
-  .grades dt { font-size: 0.85rem; color: var(--muted); }
-  .grades dd {
-    margin: 0;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-  }
-  .grades .rank {
-    margin-left: 0.4rem;
-    padding: 0.05rem 0.5rem;
-    border-radius: 99px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 0.85rem;
-  }
-
-  .coursework {
-    margin-top: 0.85rem;
+  .desc {
+    margin-top: 0.75rem;
     font-size: 0.95rem;
     color: var(--muted);
   }
+
+  .kind {
+    padding: 0.05rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 99px;
+    background: var(--surface);
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .venue-tag {
+    padding: 0.05rem 0.6rem;
+    border-radius: 99px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.7rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .links a:hover { border-color: var(--accent); background: var(--accent-soft); }
 
   .notes {
     display: grid;
@@ -327,19 +502,30 @@
     background: var(--accent);
   }
 
-  /* ---------- Publications ---------- */
-  .pubs { margin: 0; padding: 0; list-style: none; }
+  /* ---------- Publications: grouped by year ---------- */
+  .years { margin: 0; padding: 0; list-style: none; }
 
-  .pub {
-    padding-block: 1.6rem;
+  .year-group {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0 1.5rem;
+    padding-block: 1.75rem;
     border-top: 1px solid var(--rule);
   }
-  .pub:first-child { padding-top: 0; border-top: 0; }
-  .pub:last-child { padding-bottom: 0; }
+  .year-group:first-child { padding-top: 0; border-top: 0; }
+  .year-group:last-child { padding-bottom: 0; }
+
+  .year {
+    font: 500 1.5rem/1.3 var(--serif);
+    color: var(--tick-strong);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pubs { display: grid; gap: 1.75rem; margin: 0; padding: 0; list-style: none; }
 
   .pub-title {
-    margin-bottom: 0.4rem;
-    font: 500 1.3rem/1.3 var(--serif);
+    margin-bottom: 0.35rem;
+    font: 500 1.28rem/1.3 var(--serif);
   }
   .pub-title a {
     color: var(--ink);
@@ -347,203 +533,430 @@
   }
   .pub-title a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-  .authors { font-size: 0.98rem; color: var(--muted); }
+  .authors { font-size: 0.96rem; color: var(--muted); }
   .authors strong { color: var(--ink); font-weight: 600; }
 
   .venue {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.35rem 0.7rem;
-    margin-top: 0.6rem;
+    align-items: center;
+    gap: 0.4rem 0.6rem;
+    margin-top: 0.55rem;
+  }
+  .venue-name { font: italic 400 1rem/1.4 var(--serif); }
+
+  /* ---------- Talks ---------- */
+  .talks { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+
+  .talk {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
   }
 
-  .kind {
-    padding: 0.05rem 0.6rem;
+  .talk-thumb {
+    display: block;
+    overflow: hidden;
     border: 1px solid var(--rule);
+    border-radius: 8px;
+    aspect-ratio: 16 / 9;
+    transition: border-color 0.15s, transform 0.2s;
+  }
+  .talk-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .talk-thumb:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .talk .when { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+
+  .badge {
+    padding: 0.05rem 0.55rem;
     border-radius: 99px;
-    background: var(--surface);
-    font-size: 0.82rem;
-    color: var(--muted);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 0.76rem;
+    font-weight: 600;
   }
+  .badge[hidden] { display: none; }
 
-  .venue-name { font: italic 400 1.02rem/1.4 var(--serif); }
+  .talk-title { font: 500 1.28rem/1.3 var(--serif); }
+  .talk-title a { color: var(--ink); text-decoration-color: var(--tick); }
+  .talk-title a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-  .pub-links {
-    display: flex;
-    gap: 0.5rem;
-    margin: 0.85rem 0 0;
-    padding: 0;
+  .talk .venue-name { font: 400 0.93rem/1.4 var(--sans); color: var(--muted); }
+
+  /* ---------- Timeline (education, teaching) ---------- */
+  .timeline {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 1.75rem;
     list-style: none;
+    border-left: 1px solid var(--rule);
   }
-  .pub-links a {
-    display: inline-block;
-    padding: 0.2rem 0.75rem;
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    background: var(--surface);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: none;
+
+  .timeline > li {
+    position: relative;
+    padding-bottom: 2.5rem;
   }
-  .pub-links a:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .timeline > li:last-child { padding-bottom: 0; }
+
+  .timeline > li::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.75rem - 5px);
+    top: 0.5rem;
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--tick-strong);
+    border-radius: 50%;
+    background: var(--paper);
+  }
+
+  .timeline > li.current::before {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
 
   /* ---------- Teaching ---------- */
   .courses {
     display: grid;
-    gap: 0.7rem;
-    margin: 0.7rem 0 0;
+    gap: 0;
+    margin: 0.8rem 0 0;
     padding: 0;
     list-style: none;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
   }
   .courses li {
     display: grid;
     grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
-    gap: 0.2rem 1.25rem;
+    gap: 0.15rem 1.25rem;
+    padding: 0.7rem 1rem;
+    border-top: 1px solid var(--rule);
   }
-  .prog { font-size: 0.95rem; font-weight: 600; }
+  .courses li:first-child { border-top: 0; }
+  .prog { font-size: 0.9rem; font-weight: 600; color: var(--accent); }
 
   /* ---------- Footer ---------- */
+  .foot {
+    margin-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
   .foot-inner {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.5rem 1.5rem;
-    padding-block: 1.75rem 3rem;
-    border-top: 1px solid var(--rule);
+    gap: 1rem 2rem;
+    padding-block: 2rem 3rem;
     font-size: 0.92rem;
     color: var(--muted);
   }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .foot-links a { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
+  .foot-links a:hover { text-decoration: underline; }
 
   /* ---------- Load sequence: the intro rises into place ---------- */
   @media (prefers-reduced-motion: no-preference) {
-    .hero > * { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-    .hero > :nth-child(2) { animation-delay: 0.08s; }
-    .hero > :nth-child(3) { animation-delay: 0.16s; }
-    .hero > :nth-child(4) { animation-delay: 0.24s; }
+    .hero-text > *, .latest { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+    .hero-text > :nth-child(2) { animation-delay: 0.06s; }
+    .hero-text > :nth-child(3) { animation-delay: 0.12s; }
+    .hero-text > :nth-child(4) { animation-delay: 0.18s; }
+    .hero-text > :nth-child(5) { animation-delay: 0.24s; }
+    .hero-text > :nth-child(6) { animation-delay: 0.30s; }
+    .latest { animation-delay: 0.3s; }
   }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+  /* ---------- Medium screens ---------- */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .latest { max-width: 32rem; }
+  }
 
   /* ---------- Small screens ---------- */
   @media (max-width: 760px) {
     .brand { display: none; }
-    .bar-inner { justify-content: center; }
-    .bar nav ul { gap: 1.5rem; }
+    .bar-inner { gap: 0.5rem; }
+    .bar nav { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+    .bar nav::-webkit-scrollbar { display: none; }
+    .bar nav ul { gap: 0; justify-content: space-between; }
+    .bar nav a { padding: 0.4rem 0.45rem; font-size: 0.87rem; }
 
     .section-grid { grid-template-columns: minmax(0, 1fr); }
     .section-head { position: static; }
-    .section-head .side-link { margin-top: 0.25rem; }
+
+    .year-group { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
+
+    .talk { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; padding: 0.9rem; }
 
     .courses li { grid-template-columns: minmax(0, 1fr); }
   }
 
   /* ---------- Print ---------- */
   @media print {
-    .bar, .actions, .skip { display: none; }
+    .bar, .actions, .skip, .latest, .theme-toggle { display: none; }
+    .hero-band::before { display: none; }
     .section-head { position: static; }
+    .talk { box-shadow: none; }
     body { background: #fff; color: #000; }
   }
 </style>
 </head>
 
 <body>
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/></symbol>
+  <symbol id="i-poster" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+  <symbol id="i-paper" viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+</svg>
+
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="bar">
   <div class="wrap bar-inner">
-    <a class="brand" href="#top">Valentin Lafargue</a>
+    <a class="brand" href="#top" aria-label="Valentin Lafargue, back to top">
+      <span class="monogram" aria-hidden="true">VL</span>
+      <span class="brand-name">Valentin Lafargue</span>
+    </a>
     <nav aria-label="Sections">
       <ul>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#talks">Talks</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#teaching">Teaching</a></li>
       </ul>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch light or dark theme">
+      <svg class="icon sun"><use href="#i-sun"/></svg>
+      <svg class="icon moon"><use href="#i-moon"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="main">
 
   <!-- Intro -->
-  <section class="hero wrap" id="top" aria-labelledby="name">
-    <h1 id="name">Valentin Lafargue</h1>
+  <div class="hero-band" id="top">
+    <section class="hero wrap" aria-labelledby="name">
+      <div class="hero-text">
+        <p class="eyebrow">PhD student · AI evaluation &amp; auditing</p>
+        <h1 id="name">Valentin Lafargue</h1>
 
-    <p class="lead">
-      PhD student at
-      <a href="https://www.math.univ-toulouse.fr/">IMT</a>,
-      <a href="https://www.inria.fr/">INRIA</a>,
-      <a href="https://aniti.univ-toulouse.fr/">ANITI 2</a> and
-      <a href="https://www.irit.fr/en/home/">IRIT</a>
-      focused on AI evaluation and auditing.
-    </p>
+        <p class="lead">
+          PhD student at
+          <a href="https://www.math.univ-toulouse.fr/">IMT</a>,
+          <a href="https://www.inria.fr/">INRIA</a>,
+          <a href="https://aniti.univ-toulouse.fr/">ANITI 2</a> and
+          <a href="https://www.irit.fr/en/home/">IRIT</a>
+          focused on AI evaluation and auditing.
+        </p>
 
-    <p class="about">
-      I'm passionate about interdisciplinary work, exploring how AI intersects with fields like Law, Sociology, Cultural Analytics, Psychology, and Education.
-    </p>
+        <p class="about">
+          I'm passionate about interdisciplinary work, exploring how AI intersects with fields like Law, Sociology, Cultural Analytics, Psychology, and Education.
+        </p>
 
-    <div class="actions">
-      <a class="btn" href="#publications">See publications</a>
-      <a class="btn ghost" href="#teaching">See teaching</a>
-      <a class="btn ghost" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ">Google Scholar</a>
-      <a class="btn ghost" href="mailto:valentin.lafargue@math.univ-toulouse.fr">Contact</a>
-      <a class="btn ghost" href="files/CV.pdf">CV</a>
-    </div>
+        <ul class="topics" aria-label="Research topics">
+          <li>Fairness auditing</li>
+          <li>Robustness</li>
+          <li>Bias in generative AI</li>
+          <li>LLM evaluation</li>
+          <li>Cultural alignment</li>
+        </ul>
 
-  </section>
+        <div class="actions">
+          <a class="btn primary" href="#publications">See publications</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ"><svg class="icon"><use href="#i-cap"/></svg>Google Scholar</a>
+          <a class="btn" href="files/CV.pdf"><svg class="icon"><use href="#i-file"/></svg>CV</a>
+          <a class="btn" href="mailto:valentin.lafargue@math.univ-toulouse.fr"><svg class="icon"><use href="#i-mail"/></svg>Contact</a>
+        </div>
+      </div>
+
+      <aside class="latest" aria-labelledby="latest-h">
+        <h2 id="latest-h">Latest</h2>
+        <ol>
+          <li>
+            <span class="tag">27 Nov 2026 · Seminar</span>
+            <a href="#talks">Beyond the Surface: auditing fairness and evaluating alignment in AI systems</a>
+          </li>
+          <li>
+            <span class="tag">20 Nov 2026 · Outreach</span>
+            <a href="#talks">AI Evaluation: Bias and Disloyalty, PhD in 180 seconds</a>
+          </li>
+          <li>
+            <span class="tag">ICAART 2027 · Paper</span>
+            <a href="#publications">Measuring gender bias in LLM emotion recognition</a>
+          </li>
+          <li>
+            <span class="tag">EMNLP 2026 · Paper</span>
+            <a href="#publications">Probing cultural signals in LLMs through author profiling</a>
+          </li>
+        </ol>
+      </aside>
+    </section>
+  </div>
 
   <!-- Publications -->
   <section class="wrap" id="publications" aria-labelledby="publications-h">
     <div class="section-grid">
       <div class="section-head">
+        <span class="section-num">01</span>
         <h2 id="publications-h">Publications</h2>
-        <a class="side-link" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ">Google Scholar profile</a>
+        <a class="side-link" href="https://scholar.google.com/citations?user=YdeyocYAAAAJ"><svg class="icon"><use href="#i-cap"/></svg>Google Scholar</a>
       </div>
 
-      <ul class="pubs">
-        <li class="pub">
-          <h3 class="pub-title"><a href="https://aclanthology.org/2026.emnlp-main.316/">Probing Cultural Signals in Large Language Models through Author Profiling</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, Ariel <span class="nb">Guerra-Adames</span>, Emmanuelle Claeys, Elouan Vuichard, <span class="nb">Jean-Michel</span> Loubes</p>
-          <p class="venue">
-            <span class="kind">Conference paper</span>
-            <span class="venue-name">Empirical Methods in Natural Language Processing (EMNLP) 2026</span>
-          </p>
-        </li>
-
-        <li class="pub">
-          <h3 class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-37679-4_21">Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, <span class="nb">Jean-Michel</span> Loubes</p>
-          <p class="venue">
-            <span class="kind">Conference paper</span>
-            <span class="venue-name">ECML PKDD Applied Data Science Track 2026</span>
-          </p>
-          <ul class="pub-links">
-            <li><a href="files/ecml_pkdd_2026_slides.pdf">Slides</a></li>
-            <li><a href="files/ecml_pkdd_2026_poster.pdf">Poster</a></li>
+      <ol class="years">
+        <li class="year-group">
+          <p class="year">2027</p>
+          <ul class="pubs">
+            <li class="pub">
+              <h3 class="pub-title">A Methodology to Measure Gender Bias in LLM Emotion Recognition from Enriched Multimodal Transcripts</h3>
+              <p class="authors">Elodie Etienne, <strong>Valentin Lafargue</strong>, Chloe Clavel, Magalie Ochs, <span class="nb">Jean-Michel</span> Loubes</p>
+              <p class="venue">
+                <span class="venue-tag">ICAART</span>
+                <span class="venue-name">International Conference on Agents and Artificial Intelligence (ICAART) 2027</span>
+                <span class="kind">Conference paper</span>
+              </p>
+            </li>
           </ul>
         </li>
 
-        <li class="pub">
-          <h3 class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-06129-4_18">Fairness is in the details: Face Dataset Auditing</a></h3>
-          <p class="authors"><strong>Valentin Lafargue</strong>, Emmanuelle Claeys, <span class="nb">Jean-Michel</span> Loubes</p>
-          <p class="venue">
-            <span class="kind">Conference paper</span>
-            <span class="venue-name">ECML PKDD Applied Data Science Track 2025</span>
-          </p>
-          <ul class="pub-links">
-            <li><a href="files/ecml_pkdd_2025_slides.pdf">Slides</a></li>
-            <li><a href="files/ecml_pkdd_2025_poster.pdf">Poster</a></li>
+        <li class="year-group">
+          <p class="year">2026</p>
+          <ul class="pubs">
+            <li class="pub">
+              <h3 class="pub-title"><a href="https://aclanthology.org/2026.emnlp-main.316/">Probing Cultural Signals in Large Language Models through Author Profiling</a></h3>
+              <p class="authors"><strong>Valentin Lafargue</strong>, Ariel <span class="nb">Guerra-Adames</span>, Emmanuelle Claeys, Elouan Vuichard, <span class="nb">Jean-Michel</span> Loubes</p>
+              <p class="venue">
+                <span class="venue-tag">EMNLP</span>
+                <span class="venue-name">Empirical Methods in Natural Language Processing (EMNLP) 2026</span>
+                <span class="kind">Conference paper</span>
+              </p>
+              <ul class="links">
+                <li><a href="https://aclanthology.org/2026.emnlp-main.316/"><svg class="icon"><use href="#i-paper"/></svg>Paper</a></li>
+              </ul>
+            </li>
+
+            <li class="pub">
+              <h3 class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-37679-4_21">Exposing the Illusion of Fairness: Auditing Vulnerabilities to Distributional Manipulation Attacks</a></h3>
+              <p class="authors"><strong>Valentin Lafargue</strong>, Adriana Laurindo Monteiro, Emmanuelle Claeys, Laurent Risser, <span class="nb">Jean-Michel</span> Loubes</p>
+              <p class="venue">
+                <span class="venue-tag">ECML PKDD</span>
+                <span class="venue-name">ECML PKDD Applied Data Science Track 2026</span>
+                <span class="kind">Conference paper</span>
+              </p>
+              <ul class="links">
+                <li><a href="https://link.springer.com/chapter/10.1007/978-3-032-37679-4_21"><svg class="icon"><use href="#i-paper"/></svg>Paper</a></li>
+                <li><a href="files/ecml_pkdd_2026_slides.pdf"><svg class="icon"><use href="#i-slides"/></svg>Slides</a></li>
+                <li><a href="files/ecml_pkdd_2026_poster.pdf"><svg class="icon"><use href="#i-poster"/></svg>Poster</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
 
-        <li class="pub">
-          <h3 class="pub-title"><a href="https://icml.cc/virtual/2025/48172">Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks</a></h3>
-          <p class="authors">Thibaut Boissin, Franck Mamalet, <strong>Valentin Lafargue</strong>, Mathieu Serrurier</p>
-          <p class="venue">
-            <span class="kind">Workshop paper</span>
-            <span class="venue-name">Championing <span class="nb">Open-source</span> DEvelopment in ML Workshop @ ICML25</span>
-          </p>
+        <li class="year-group">
+          <p class="year">2025</p>
+          <ul class="pubs">
+            <li class="pub">
+              <h3 class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-06129-4_18">Fairness is in the details: Face Dataset Auditing</a></h3>
+              <p class="authors"><strong>Valentin Lafargue</strong>, Emmanuelle Claeys, <span class="nb">Jean-Michel</span> Loubes</p>
+              <p class="venue">
+                <span class="venue-tag">ECML PKDD</span>
+                <span class="venue-name">ECML PKDD Applied Data Science Track 2025</span>
+                <span class="kind">Conference paper</span>
+              </p>
+              <ul class="links">
+                <li><a href="https://link.springer.com/chapter/10.1007/978-3-032-06129-4_18"><svg class="icon"><use href="#i-paper"/></svg>Paper</a></li>
+                <li><a href="files/ecml_pkdd_2025_slides.pdf"><svg class="icon"><use href="#i-slides"/></svg>Slides</a></li>
+                <li><a href="files/ecml_pkdd_2025_poster.pdf"><svg class="icon"><use href="#i-poster"/></svg>Poster</a></li>
+              </ul>
+            </li>
+
+            <li class="pub">
+              <h3 class="pub-title"><a href="https://icml.cc/virtual/2025/48172">Orthogonium: A Unified, Efficient Library of Orthogonal and 1‑Lipschitz Building Blocks</a></h3>
+              <p class="authors">Thibaut Boissin, Franck Mamalet, <strong>Valentin Lafargue</strong>, Mathieu Serrurier</p>
+              <p class="venue">
+                <span class="venue-tag">ICML</span>
+                <span class="venue-name">Championing <span class="nb">Open-source</span> DEvelopment in ML Workshop @ ICML25</span>
+                <span class="kind">Workshop paper</span>
+              </p>
+              <ul class="links">
+                <li><a href="https://icml.cc/virtual/2025/48172"><svg class="icon"><use href="#i-paper"/></svg>Paper</a></li>
+              </ul>
+            </li>
+          </ul>
         </li>
-      </ul>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Talks: seminars and outreach (conference presentations sit with each paper) -->
+  <section class="wrap" id="talks" aria-labelledby="talks-h">
+    <div class="section-grid">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 id="talks-h">Talks</h2>
+        <p class="section-note">Seminars and outreach. Conference slides and posters are listed with each paper.</p>
+      </div>
+
+      <ol class="talks" reversed>
+        <li class="talk">
+          <a class="talk-thumb" href="files/regional_seminar_45min.pdf" aria-hidden="true" tabindex="-1">
+            <img src="files/thumbs/regional_seminar.jpg" alt="" width="800" height="450" loading="lazy">
+          </a>
+          <div>
+            <p class="when"><time datetime="2026-11-27">27 November 2026</time> <span class="badge" data-until="2026-11-27" hidden>Upcoming</span></p>
+            <h3 class="talk-title"><a href="files/regional_seminar_45min.pdf">Beyond the Surface: An Introduction to Auditing Fairness and Evaluating Alignment in AI Systems</a></h3>
+            <p class="venue">
+              <span class="kind">Seminar · 45 min</span>
+              <span class="venue-name">Regional session of the PhD students&rsquo; seminar, OcciMath (IMT &amp; IMAG)</span>
+            </p>
+            <p class="desc">What it means for an algorithm to be fair, where biases come from, why fairness audits are hard, and the new concerns raised by LLMs: cultural alignment, sycophancy and manipulation.</p>
+            <ul class="links">
+              <li><a href="files/regional_seminar_45min.pdf"><svg class="icon"><use href="#i-slides"/></svg>Slides (PDF)</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="talk">
+          <a class="talk-thumb" href="files/PhD_in_180s.pdf" aria-hidden="true" tabindex="-1">
+            <img src="files/thumbs/phd_in_180s.jpg" alt="" width="800" height="450" loading="lazy">
+          </a>
+          <div>
+            <p class="when"><time datetime="2026-11-20">20 November 2026</time> <span class="badge" data-until="2026-11-20" hidden>Upcoming</span></p>
+            <h3 class="talk-title"><a href="files/PhD_in_180s.pdf">AI Evaluation: Bias and Disloyalty</a></h3>
+            <p class="venue">
+              <span class="kind">Outreach · 3 min</span>
+              <span class="venue-name">PhD in 180 seconds</span>
+            </p>
+            <p class="desc">My PhD in three minutes: fairness audits under the EU AI Act, auditing when sensitive attributes must be predicted, and whether an auditee can cheat an audit.</p>
+            <ul class="links">
+              <li><a href="files/PhD_in_180s.pdf"><svg class="icon"><use href="#i-slides"/></svg>Slides (PDF)</a></li>
+            </ul>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -551,6 +964,7 @@
   <section class="wrap" id="education" aria-labelledby="education-h">
     <div class="section-grid">
       <div class="section-head">
+        <span class="section-num">03</span>
         <h2 id="education-h">Education</h2>
       </div>
 
@@ -562,8 +976,8 @@
           <p class="where">IMT, INRIA, ANITI 2, IRIT</p>
           <ul class="notes">
             <li>Supervised by <span class="nb">J.-M.</span> Loubes and E. Claeys</li>
-            <li>Research on fairness, robustness and bias auditing in machine learning and generative AI </li>
-            <li>Teaching duties: <span class="nb">Lecture, project/TER</span> supervision, tutorials (TDs) and practicals (TPs) </li>
+            <li>Research on fairness, robustness and bias auditing in machine learning and generative AI</li>
+            <li>Teaching duties: <span class="nb">Lecture, project/TER</span> supervision, tutorials (TDs) and practicals (TPs)</li>
           </ul>
         </li>
 
@@ -572,7 +986,7 @@
           <h3 class="entry-title">Master 2 (MSc)</h3>
           <p class="subject">Data Science and Data Engineering</p>
           <p class="where">Université Paul Sabatier, Toulouse</p>
-          <p class="coursework">Deep Learning, NLP &amp; SVACS, advanced statistics, parallel databases and cloud computing, business management, NoSQL, ethical communication, law for data.</p>
+          <p class="desc">Deep Learning, NLP &amp; SVACS, advanced statistics, parallel databases and cloud computing, business management, NoSQL, ethical communication, law for data.</p>
         </li>
 
         <li>
@@ -580,7 +994,7 @@
           <h3 class="entry-title">Master 1</h3>
           <p class="subject">Data Science and Data Engineering</p>
           <p class="where">Université Paul Sabatier, Toulouse</p>
-          <p class="coursework">Statistics, optimization, time series, machine learning, data warehousing, data mining, advanced algorithmics, advanced Python.</p>
+          <p class="desc">Statistics, optimization, time series, machine learning, data warehousing, data mining, advanced algorithmics, advanced Python.</p>
         </li>
 
         <li>
@@ -597,12 +1011,13 @@
   <section class="wrap" id="teaching" aria-labelledby="teaching-h">
     <div class="section-grid">
       <div class="section-head">
+        <span class="section-num">04</span>
         <h2 id="teaching-h">Teaching</h2>
       </div>
 
       <ol class="timeline">
-        <li>
-          <h3 class="entry-title"><span class="nb">2026–2027</span></h3>
+        <li class="current">
+          <p class="when"><span class="nb">2026–2027</span></p>
           <ul class="courses">
             <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning <span class="nb">TDs/TPs</span></span></li>
             <li><span class="prog">M2 SID UT</span><span>Deep Learning <span class="nb">Lectures/TDs/TPs</span></span></li>
@@ -611,7 +1026,7 @@
         </li>
 
         <li>
-          <h3 class="entry-title"><span class="nb">2025–2026</span></h3>
+          <p class="when"><span class="nb">2025–2026</span></p>
           <ul class="courses">
             <li><span class="prog">1st year INSA</span><span>Maths 0 TDs (Logic, Set theory, Applications, Sequence)</span></li>
             <li><span class="prog">M1 SID UT</span><span>Math methods for supervised Machine Learning <span class="nb">TDs/TPs</span></span></li>
@@ -620,10 +1035,10 @@
         </li>
 
         <li>
-          <h3 class="entry-title"><span class="nb">2024–2025</span></h3>
+          <p class="when"><span class="nb">2024–2025</span></p>
           <ul class="courses">
-            <li><span class="prog"><span class="nb">M1–M2</span> SID UT3</span><span><span class="nb">Inter-promotional</span> project supervision. </span></li>
-            <li><span class="prog">M1 SID UT3</span><span>TER supervisions, M1 students working on ML in education</span></li>
+            <li><span class="prog"><span class="nb">M1–M2</span> SID UT3</span><span><span class="nb">Inter-promotional</span> project supervision: Open data university, energy performance diagnosis group</span></li>
+            <li><span class="prog">M1 SID UT3</span><span>TER supervisions, two students working on LLM evaluation and ML applications in education</span></li>
             <li><span class="prog">M2 SID UT3</span><span>Learning process for Big Data, presentation jury</span></li>
           </ul>
         </li>
@@ -633,35 +1048,72 @@
 
 </main>
 
-<footer class="wrap">
-  <div class="foot-inner">
-    <p>© Valentin Lafargue</p>
-    <p><a href="mailto:valentin.lafargue@math.univ-toulouse.fr"><span class="nb">valentin.lafargue@math.univ-toulouse.fr</span></a></p>
-    <p><a href="#top">Back to top</a></p>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <p>© Valentin Lafargue · Updated November 2026</p>
+    <ul class="foot-links">
+      <li><a href="mailto:valentin.lafargue@math.univ-toulouse.fr"><svg class="icon"><use href="#i-mail"/></svg>Email</a></li>
+      <li><a href="https://scholar.google.com/citations?user=YdeyocYAAAAJ"><svg class="icon"><use href="#i-cap"/></svg>Google Scholar</a></li>
+      <li><a href="files/CV.pdf"><svg class="icon"><use href="#i-file"/></svg>CV</a></li>
+      <li><a href="#top"><svg class="icon"><use href="#i-up"/></svg>Back to top</a></li>
+    </ul>
   </div>
 </footer>
 
 <script>
-  // Highlight the current section in the top navigation.
+  // Light/dark switch: follows the system until the visitor picks one.
   (function () {
-    if (!('IntersectionObserver' in window)) return;
-    var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
-    var byId = {};
-    links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (a) { a.removeAttribute('aria-current'); });
-        var active = byId[entry.target.id];
-        if (active) active.setAttribute('aria-current', 'true');
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-
-    Object.keys(byId).forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) observer.observe(el);
+    var root = document.documentElement;
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function isDark() {
+      var t = root.getAttribute('data-theme');
+      return t ? t === 'dark' : mq.matches;
+    }
+    function sync() { root.classList.toggle('is-dark', isDark()); }
+    sync();
+    if (mq.addEventListener) mq.addEventListener('change', sync);
+    document.querySelector('.theme-toggle').addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      sync();
     });
+  })();
+
+  // Show "Upcoming" on talks whose date has not passed yet.
+  (function () {
+    var d = new Date();
+    var today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    Array.prototype.forEach.call(document.querySelectorAll('.badge[data-until]'), function (b) {
+      if (b.getAttribute('data-until') >= today) b.hidden = false;
+    });
+  })();
+
+  // Highlight the current section in the top navigation.
+  // The active section is the last one whose top has passed a third of the screen.
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
+    var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var line = window.innerHeight / 3;
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      var active = -1;
+      sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) active = i; });
+      if (atBottom) active = sections.length - 1;
+      links.forEach(function (a, i) {
+        if (i === active) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 </script>
 </body>
